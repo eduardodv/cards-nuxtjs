@@ -1,5 +1,5 @@
 <template>
-  <v-footer class="text-center" app>
+  <v-footer class="text-center">
     <v-container>
       <span>&copy; {{ new Date().getFullYear() }} - Eduardo Dalla Vecchia </span>
     </v-container>

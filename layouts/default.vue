@@ -12,11 +12,6 @@
 
 <script>
 export default {
-  name: 'DefaultLayout',
-  data () {
-    return {
-      title: 'Vuetify.js'
-    }
-  }
+  name: 'DefaultLayout'
 }
 </script>
