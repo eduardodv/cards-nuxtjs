@@ -13,12 +13,11 @@
   }
   .box {
     padding: 0 20px;
-    // display: flex;
-    // flex-direction: column;
-    // justify-content: space-between;
   }
   .v-card__title {
     padding: 10px 0;
+    line-height: 1.3;
+    word-break: normal;
     a {
       text-decoration: none;
       color: #000;
@@ -37,5 +36,35 @@
   }
   .v-card__actions {
     padding: 10px 0;
+  }
+}
+
+@media #{map-get($display-breakpoints, 'xs-only')} {
+  .card-item {
+    .box {
+      padding: 0 10px;
+    }
+    .v-card__title {
+      font-size: 16px;
+    }
+    .price {
+      font-size: 18px;
+      padding-right: 5px;
+      &:before {
+        font-size: 11px;
+      }
+    }
+    .v-card__actions {
+      .v-btn {
+        width: 24px;
+        height: 24px;
+        margin-left: 3px !important;
+        i {
+          font-size: 18px;
+          width: 18px;
+          height: 18px;
+        }
+      }
+    }
   }
 }

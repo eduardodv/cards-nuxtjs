@@ -1,0 +1,43 @@
+
+#header {
+  background-color: $color-1;
+  .container {
+    display: flex;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+  .v-toolbar__title {
+    display: inline-block;
+    padding: 10px 40px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    border: 1px solid #fff;
+    text-transform: uppercase;
+    background-color: rgba(#fff, .2);
+  }
+  .cart-btn {
+    position: relative;
+    .cart-count {
+      background-color: red;
+      border-radius: 50%;
+      width: 15px;
+      height: 15px;
+      display: flex;
+      align-items: center;
+      font-size: 12px;
+      line-height: 1;
+      letter-spacing: -0.5px;
+      font-weight: bold;
+      justify-content: center;
+      position: absolute;
+      top: -5px;
+      right: 7px;
+    }
+  }
+}
+
+@media #{map-get($display-breakpoints, 'sm-and-down')} {
+  #header {
+      
+  }
+}

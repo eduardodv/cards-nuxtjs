@@ -16,25 +16,62 @@
         <span class="price">{{ beer.price }}</span>
         <v-spacer />
 
-        <v-btn icon color="red" @click="$nuxt.$emit('like')">
+        <v-btn icon @click="addWishlist(beer)">
           <v-icon>mdi-heart</v-icon>
         </v-btn>
 
-        <v-btn icon>
-          <v-icon>mdi-cart</v-icon>
+        <v-btn icon :color="hasItem(beer.beer_id) ? 'green' : ''" @click="addCart(beer)">
+          <v-icon>mdi-cart{{ hasItem(beer.beer_id) ? '-off' : '' }}</v-icon>
         </v-btn>
       </v-card-actions>
     </div>
+    <!-- <v-snackbar
+      v-model="snackbar"
+      :timeout="timeout"
+      :right="true"
+      :color="color"
+    >
+      {{ text }}
+      <template
+        #action="
+          {
+            attrs
+          }"
+      >
+        <v-btn
+          icon
+          v-bind="attrs"
+          @click="snackbar = false"
+        >
+          <v-icon>mdi-close</v-icon>
+        </v-btn>
+      </template>
+    </v-snackbar> -->
   </v-card>
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
   props: {
     beer: {
       default: null,
       type: Object
     }
+  },
+  data () {
+    return {
+      // snackbar: false,
+      // text: null,
+      // timeout: -1,
+      // color: null,
+    }
+  },
+  computed: {
+    ...mapGetters({
+      hasItem: 'cart/hasItem'
+    })
   },
   created () {
     // this.imageHeight()
@@ -43,17 +80,31 @@ export default {
     // window.addEventListener('resize', this.imageHeight)
   },
   methods: {
-    imageHeight () {
-      const imageHeight = document.querySelectorAll('.v-card .v-image__image')
-      imageHeight.forEach(function (e) {
-        e.style.height = `${e.offsetWidth}px`
-        e.style.opacity = 0
-      })
-    }
+    ...mapActions('cart', ['addCart']),
+    ...mapActions('wishlist', ['addWishlist'])
+
+    // addWishlist () {
+    //   if (this.active !== true) {
+    //     this.active = true
+    //     this.snackbar = true
+    //     this.text = 'Adicionado aos favoritos com sucesso!'
+    //     this.timeout = 2000
+    //     return
+    //   }
+    //   this.active = false
+    //   this.snackbar = false
+    // }
+    // imageHeight () {
+    //   const imageHeight = document.querySelectorAll('.v-card .v-image__image')
+    //   imageHeight.forEach(function (e) {
+    //     e.style.height = `${e.offsetWidth}px`
+    //     e.style.opacity = 0
+    //   })
+    // }
   }
 }
 </script>
 
 <style lang="scss">
-  @import '~/assets/card.scss';
+  @import '~/assets/components/card.scss';
 </style>
