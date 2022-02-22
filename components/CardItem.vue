@@ -16,13 +16,35 @@
         <span class="price">{{ beer.price }}</span>
         <v-spacer />
 
-        <v-btn icon @click="addWishlist(beer)">
-          <v-icon>mdi-heart</v-icon>
-        </v-btn>
+        <v-tooltip bottom>
+          <template v-if="hasItemWishlist(beer.beer_id)" #activator="{ on, attrs }">
+            <v-btn color="red" v-bind="attrs" icon v-on="on" @click="removeWishlist(beer.beer_id)">
+              <v-icon>mdi-heart</v-icon>
+            </v-btn>
+          </template>
+          <template v-else #activator="{ on, attrs }">
+            <v-btn icon v-bind="attrs" v-on="on" @click="addWishlist(beer)">
+              <v-icon>mdi-heart</v-icon>
+            </v-btn>
+          </template>
+          <span>{{ hasItemWishlist(beer.beer_id) ? 'Remove from Wishlist' : 'Add to Wishlist' }}
+          </span>
+        </v-tooltip>
 
-        <v-btn icon :color="hasItem(beer.beer_id) ? 'green' : ''" @click="addCart(beer)">
-          <v-icon>mdi-cart{{ hasItem(beer.beer_id) ? '-off' : '' }}</v-icon>
-        </v-btn>
+        <v-tooltip bottom>
+          <template v-if="hasItem(beer.beer_id)" #activator="{ on, attrs }">
+            <v-btn color="green" v-bind="attrs" icon v-on="on" @click="removeCart(beer.beer_id)">
+              <v-icon>mdi-cart</v-icon>
+            </v-btn>
+          </template>
+          <template v-else #activator="{ on, attrs }">
+            <v-btn icon v-bind="attrs" v-on="on" @click="addCart(beer)">
+              <v-icon>mdi-cart</v-icon>
+            </v-btn>
+          </template>
+          <span>{{ hasItem(beer.beer_id) ? 'Remove from Cart' : 'Add to Cart' }}
+          </span>
+        </v-tooltip>
       </v-card-actions>
     </div>
     <!-- <v-snackbar
@@ -70,7 +92,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      hasItem: 'cart/hasItem'
+      hasItem: 'cart/hasItem',
+      hasItemWishlist: 'wishlist/hasItemWishlist'
     })
   },
   created () {
@@ -80,8 +103,8 @@ export default {
     // window.addEventListener('resize', this.imageHeight)
   },
   methods: {
-    ...mapActions('cart', ['addCart']),
-    ...mapActions('wishlist', ['addWishlist'])
+    ...mapActions('cart', ['addCart', 'removeCart']),
+    ...mapActions('wishlist', ['addWishlist', 'removeWishlist'])
 
     // addWishlist () {
     //   if (this.active !== true) {

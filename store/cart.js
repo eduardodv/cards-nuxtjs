@@ -25,9 +25,9 @@ export const mutations = {
       state.products.push({ ...data, quantity: 1 })
     }
   },
-  REMOVE_CART (state, data) {
-    console.log(data)
-    return data
+  REMOVE_CART (state, id) {
+    const productIndex = state.products.findIndex(product => product.beer_id === id)
+    state.products.splice(productIndex, 1)
   }
 }
 

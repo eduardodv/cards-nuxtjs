@@ -4,6 +4,13 @@ export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
 
+  // Loading
+  loadingIndicator: {
+    name: 'circle',
+    color: '#05152E',
+    background: 'white'
+  },
+
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
 
